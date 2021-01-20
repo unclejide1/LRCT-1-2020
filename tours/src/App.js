@@ -44,6 +44,7 @@ function App() {
       <main>
         <div className="title">
           <h2>no tours left</h2>
+          <button className="btn" onClick={getTours}>refresh</button>
         </div>
       </main>
     )
