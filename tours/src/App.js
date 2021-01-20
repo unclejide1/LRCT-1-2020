@@ -5,7 +5,39 @@ import Tours from './Tours'
 // I SWITCHED TO PERMANENT DOMAIN
 const url = 'https://course-api.com/react-tours-project'
 function App() {
-  return <h2>Tours Project Setup</h2>
-}
+  const [isLoading, setIsLoading] = useState(true)
+  const [tours, setTours] = useState([])
 
+  const getTours = async () => {
+    setIsLoading(true)
+    try {
+      const response = await fetch(url)
+      response.json().then((tours) => {
+        setIsLoading(false)
+        setTours(tours)
+      })
+      
+    } catch (error) {
+      setIsLoading(false)
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getTours()
+  }, [])
+  
+  if (isLoading) {
+    return (
+      <main>
+        <Loading />
+      </main>
+    )
+  }
+  return (
+    <main>
+      <Tours tours={tours} />
+    </main>
+  )
+}
 export default App
