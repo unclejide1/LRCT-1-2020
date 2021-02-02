@@ -5,9 +5,19 @@ function App() {
   const [text, setText] = useState([])
   const handleSubmit = (e) => {
     e.preventDefault();
-    setText(data)
+    let amount = parseInt(count)
+    if(count <= 0){
+      window.alert("you can not generate paragraphs of 0 or negative value")
+      return
+      
+    }
+    if(count > 9){
+       window.alert('you can not generate paragraphs of more than length of 9 for now')
+      amount = 9
+    }
+    setText(data.slice(0, amount))
   }
-  console.log(data.length)
+  
   return (
     <section className='section-center'>
       <h2>tired of boring lorem ipsum</h2>
