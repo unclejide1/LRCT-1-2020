@@ -19,29 +19,34 @@ function App() {
        // deal with edit
      }
      else{
-       // show alert
+        showAlert(true, 'item added to the list', 'success')
         const newItem = {id: new Date().getTime().toString(), title: name}
         setList([...list, newItem]);
         setName('');
      }
-    console.log('submitted')
-    console.log(name)
+    
     
    }
-   useEffect(() => {
-     const timeout = setTimeout(() => {
-       showAlert()
-     }, 3000)
-     return () => clearTimeout(timeout)
-   }, [alert])
+   
 
    const showAlert = (show = false, msg = '', type = '') => {
      setAlert({ show, msg, type })
    }
+
+   const clearList = () => {
+     showAlert(true, 'empty list', 'danger')
+     setList([])
+   }
+
+   const removeItem =(id) => {
+     showAlert(true, 'item removed', 'danger')
+     const newList = list.filter((item) => item.id !== id)
+     setList(newList)
+   }
   return (
     <section className='section-center'>
       <form className='grocery-form' onSubmit={handleSubmit}>
-        {alert.show && <Alert {...alert}/>}
+        {alert.show && <Alert {...alert} removeAlert = {showAlert}/>}
         <h3>Grocery Bud</h3>
         <div className='form-control'>
           <input
@@ -61,8 +66,8 @@ function App() {
 
       {list.length > 0 && (
         <div className='grocery-container'>
-          <List items={list} />
-          <button className='clear-btn'>clear</button>
+          <List items={list} removeItem={removeItem} />
+          <button className='clear-btn' onClick = {clearList}>clear</button>
         </div>
       )}
     </section>
