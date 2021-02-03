@@ -20,8 +20,8 @@ function App() {
      else{
        // show alert
         const newItem = {id: new Date().getTime().toString(), title: name}
-        setList([...List, newItem])
-        setName('')
+        setList([...list, newItem]);
+        setName('');
      }
     console.log('submitted')
     console.log(name)
@@ -40,17 +40,20 @@ function App() {
             value={name}
             placeholder='e.g eggs'
             onChange={(e) => setName(e.target.value)}
-            className="grocery"
+            className='grocery'
           />
           <button type='submit' className='submit-btn'>
             {isEdit ? 'edit' : 'submit'}
           </button>
         </div>
       </form>
-      <div className='grocery-container'>
-        <List  items = {list}/>
-        <button className='clear-btn'>clear</button>
-      </div>
+
+      {list.length > 0 && (
+        <div className='grocery-container'>
+          <List items={list} />
+          <button className='clear-btn'>clear</button>
+        </div>
+      )}
     </section>
   )
 }
