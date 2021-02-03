@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SingleColor from './SingleColor'
 
 import Values from 'values.js'
@@ -21,6 +21,16 @@ function App() {
     
     
    }
+
+
+   useEffect(() => {
+     const timeout = setTimeout(() => {
+       setError(false)
+     }, 3000)
+     
+     return () => clearTimeout(timeout)
+   }, [error])
+   
   return (
     <>
       <section className='container'>
