@@ -10,27 +10,42 @@ function App() {
 
    const handleSubmit = (e) => {
     e.preventDefault();
+    
+    try{
+      let colors = new Values(color).all(10)
+      setList(colors)
+    }catch(error){
+      setError(true)
+     console.log(error)
+    }
+    
+    
    }
   return (
     <>
       <section className='container'>
         <h3>color generator</h3>
-        <form className='' onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+          {error && <p className='errorText'> pass in right values</p>}
           <input
             type='text'
             name='color'
             id='color'
             value={color}
-            placeholder="#f15025"
+            placeholder='#f15025'
             onChange={(e) => setColor(e.target.value)}
+            className = {`${error ? 'error': null}`}
           />
           <button type='submit' className='btn'>
             submit
           </button>
         </form>
       </section>
-      <section className="colors">
-        <h4>List goes here</h4>
+      <section className='colors'>
+        {list.map((color, index) => {
+          console.log(color)
+          return <SingleColor key={index} {...color} index={index} hexColor={color.hex}/>
+        })}
       </section>
     </>
   )
