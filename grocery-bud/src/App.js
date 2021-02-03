@@ -3,7 +3,16 @@ import List from './List'
 import Alert from './Alert'
 
 function App() {
-  return <h2>grocery bud setup</h2>
+  const [name, setName] = useState('')
+  const [list, setList] = useState([])
+  const [isEdit, setEdit] = useState(false)
+  const [editId, setEditId] = useState(null)
+  const [alert, setAlert] = useState({show: false, msg: '', type:''})
+  return <section className ="section-center">
+    <div className="grocery-container">
+      
+    </div>
+  </section>
 }
 
 export default App
