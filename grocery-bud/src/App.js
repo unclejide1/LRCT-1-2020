@@ -13,6 +13,7 @@ function App() {
      e.preventDefault()
      if(!name){
        // display alert
+       showAlert(true, 'please enter value', 'danger')
      }
      else if(name && isEdit){
        // deal with edit
@@ -27,10 +28,20 @@ function App() {
     console.log(name)
     
    }
+   useEffect(() => {
+     const timeout = setTimeout(() => {
+       showAlert()
+     }, 3000)
+     return () => clearTimeout(timeout)
+   }, [alert])
+
+   const showAlert = (show = false, msg = '', type = '') => {
+     setAlert({ show, msg, type })
+   }
   return (
     <section className='section-center'>
       <form className='grocery-form' onSubmit={handleSubmit}>
-        {alert.show && <Alert />}
+        {alert.show && <Alert {...alert}/>}
         <h3>Grocery Bud</h3>
         <div className='form-control'>
           <input
