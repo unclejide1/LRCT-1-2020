@@ -11,6 +11,18 @@ function App() {
 
    const handleSubmit = (e) => {
      e.preventDefault()
+     if(!name){
+       // display alert
+     }
+     else if(name && isEdit){
+       // deal with edit
+     }
+     else{
+       // show alert
+        const newItem = {id: new Date().getTime().toString(), title: name}
+        setList([...List, newItem])
+        setName('')
+     }
     console.log('submitted')
     console.log(name)
     
@@ -36,7 +48,7 @@ function App() {
         </div>
       </form>
       <div className='grocery-container'>
-        <List />
+        <List  items = {list}/>
         <button className='clear-btn'>clear</button>
       </div>
     </section>
