@@ -48,7 +48,7 @@ function App() {
     <section className="photos">
       <div className="photos-center">
         {photos.map((photo, index) => {
-          return<Photo key={index} {...photo}/>
+          return<Photo key={photo.id} {...photo}/>
         })}
       </div>
       {loading && <h2 className="loading">Loading...</h2>}
