@@ -46,24 +46,27 @@ function App() {
 
   useEffect(() => {
     fetchImages()
+    // eslint-disable-next-line
   }, [page])
 
   useEffect(() => {
     const event = window.addEventListener('scroll', () => {
-      if(!loading && (window.innerHeight + window.scrollY) >= (document.body.scrollHeight -2 )){
+      if (
+        !loading &&
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 2
+      ) {
         setPage((oldPage) => {
           return oldPage + 1
         })
       }
-      
     })
     return () => window.removeEventListener('scroll', event)
+    // eslint-disable-next-line
   }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setPage(1)
-    fetchImages()
   }
 
   
