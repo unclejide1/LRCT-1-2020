@@ -18,10 +18,9 @@ const AppProvider = ({ children }) => {
         setMovies(data.Search)
         setError({show:false, msg: ''})
       }else{
-        setError({show:true, msg: data.error})
+        setError({show:true, msg: data.Error})
       }
       setIsLoading(false)
-      console.log(data);
     } catch (error) {
       console.log(error)
     }
