@@ -46,11 +46,24 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  const nextQuestion = () => {
+    setIndex((oldIndex) => {
+      let newIndex = oldIndex + 1
+      if(newIndex > questions.length-1){
+        //open modal
+        return 0
+      }else{
+        return newIndex
+      }
+      
+    })
+  }
+
   useEffect(() => {
     fetchQuestions(tempUrl)
   }, [])
   return <AppContext.Provider value={{waiting,isLoading,questions,index,correct,
-    error,isModalOpen}}>{children}</AppContext.Provider>
+    error,isModalOpen, nextQuestion}}>{children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {
