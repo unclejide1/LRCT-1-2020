@@ -5,7 +5,7 @@ import SetupForm from './SetupForm'
 import Loading from './Loading'
 import Modal from './Modal'
 function App() {
-  const {waiting, isLoading, questions, index, correct, nextQuestion} = useGlobalContext()
+  const {waiting, isLoading, questions, index, correct, nextQuestion, checkAnswer, closeModal, isModalOpen} = useGlobalContext()
 
 
   if(waiting){
@@ -18,7 +18,8 @@ function App() {
   const {question, incorrect_answers, correct_answer} = questions[index]
   const answers = [...incorrect_answers, correct_answer]
   return <main>
-    {/* <Modal/> */}
+    {isModalOpen && <Modal/>}
+  
     <section className="quiz">
       <p className="correct-answers">
         correct answers : {correct}/{index}
@@ -27,7 +28,7 @@ function App() {
         <h2 dangerouslySetInnerHTML={{__html: question}}/>
         <div className="btn-container">
           {answers.map((answer, index) => {
-            return <button key={index} className="answer-btn" dangerouslySetInnerHTML={{__html:answer}}/>
+            return <button key={index} className="answer-btn" dangerouslySetInnerHTML={{__html:answer}} onClick={() => checkAnswer(correct_answer === answer)}/>
           })}
         </div>
       </article>
